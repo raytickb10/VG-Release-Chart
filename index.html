@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>API Capstone using GiantBomb</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Open+Sans" rel="stylesheet">
+  </head>
+   
+  <body>
+    <nav role="navigation">
+      <h1 onClick="window.location.href=window.location.href">VG Release Chart</h1>
+      <div class = "instructions">Find all the information you need about upcoming video games.</div>
+        <form role="form">
+            <input type="text" id="search-term" title="Search Term" placeholder="Example: Crackdown"/><br>
+            <input type="submit" value="Search" role="button" /> 
+            <div class="errorMessage"></div>
+        </form>
+        
+      </nav>
+      <div class="loaderDiv"></div>
+      <main role="main" aria-live="assertive">
+          <div class="text-results"></div>
+          <ul class="results"></ul>
+          <div class="alternateMethod">
+            <div class="alternateFinderInstructions">Check out these upcoming games below!</div>
+            <ul class="popularGames"></ul>
+          </div>
+      </main>
+      
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
