@@ -35,7 +35,7 @@ function searchForGames(searchTerm, callback){
     url: BASE_URL_SEARCH,
     data: {
       api_key : apiKey, 
-      query: `${searchTerm}`,
+      query: '${searchTerm}',
       resources: 'game',
       format: 'jsonp',
       limit: 10,
