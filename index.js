@@ -87,32 +87,47 @@ function addTopGamesToStore(response){
 }
 //creates the HTML for the initial game results
 function generateTopGamesHTML(game){
-  if(game.expected_release_day === null){
-    game.expected_release_day = '';
+  let topExpectedReleaseDay = '';
+  let topExpectedReleaseMonth = 'TBA';
+  let topExpectedReleaseYear = '';
+
+  if(game.expected_release_day !== null){
+    topExpectedReleaseDay = game.expected_release_day;
   }
-  else{game.expected_release_day = game.expected_release_day;}
-  if(game.expected_release_month === null && game.expected_release_quarter === null){
-    game.expected_release_month = 'TBA ';
+  
+  if(game.expected_release_quarter !== null){
+    topExpectedReleaseMonth = game.expected_release_quarter;
   }
-  else if(game.expected_release_month === null && game.expected_release_quarter !== null){
-    game.expected_release_month = game.expected_release_quarter;
+  else if (game.expected_release_month !== null) topExpectedReleaseMonth = game.expected_release_month;
+  
+  if(game.expected_release_year){
+    topExpectedReleaseYear = game.expected_release_year;
   }
-  else{game.expected_release_month = game.expected_release_month + '-';}
-  if(game.expected_release_year === null){
-    game.expected_release_year = '';
+
+  if(typeof topExpectedReleaseMonth === "number"){
+    if(topExpectedReleaseMonth.toString().length == 1)
+    {topExpectedReleaseMonth = '0' + topExpectedReleaseMonth;}
   }
-  else{game.expected_release_year = game.expected_release_year + '-';}
+  if(typeof topExpectedReleaseDay === "number"){
+    if(topExpectedReleaseDay.toString().length == 1)
+    {topExpectedReleaseDay = '0' + topExpectedReleaseDay;}
+  }
+
+  let topDate = '';
+  if (topExpectedReleaseYear) topDate += topExpectedReleaseYear + '-' 
+    topDate += topExpectedReleaseMonth;
+  if (topExpectedReleaseDay) topDate += '-' + topExpectedReleaseDay ;
 
   return `
   <li data-id="${game.id}" class="gameCard" >
-  <div class="cardWrapper">
-    <a href="${BASE_URL}${game.name}/${baseID}${game.id}/" target="_blank">
-      <div class="gameName">${game.name}</div> 
-      <img src="${game.image.small_url}" alt="This is a clickable picture that will take you to the game" class="cardImage" title="Related Game Image"> 
-      <span class="gameID">Expected Release Date: ${game.expected_release_year}${game.expected_release_month}${game.expected_release_day}</span> </li>
+    <div class="cardWrapper">
+      <a href="${BASE_URL}${game.name}/${baseID}${game.id}/" target="_blank">
+       <div class="gameName">${game.name}</div> 
+       <img src="${game.image.small_url}" alt="This is a clickable picture that will take you to the game" class="cardImage" title="Related Game Image"> 
+        <span class="gameID">Expected Release Date: ${topDate}</span>
+      </a> 
     </div>
-  </a>`
-  ;
+  </li>`;
 }
 
 function renderTopGames(){
@@ -178,43 +193,61 @@ function generateResultsText(numResults){
 }
 //creates the HTML for the searched games
 function generateGamesHTML(game){
-  if(game.results.expected_release_day === null){
-    game.results.expected_release_day = '';
-  }
-  else{game.results.expected_release_day = game.results.expected_release_day;}
+  let originalReleaseDate = '';
+  let expectedReleaseDay = '';
+  let expectedReleaseMonth = 'TBA';
+  let expectedReleaseYear = '';
 
-  if(game.results.expected_release_month === null && game.results.expected_release_quarter === null){
-    game.results.expected_release_month = 'TBA ';
-  }
-  else if(game.results.expected_release_month === null && game.results.expected_release_quarter !== null){
-    game.results.expected_release_month = game.results.expected_release_quarter;
-  }
-  else{game.results.expected_release_month = game.results.expected_release_month + '-';}
+  if (game.results.expected_release_day !== null) 
+    expectedReleaseDay = game.results.expected_release_day;
 
-  if(game.results.expected_release_year === null){
-    game.results.expected_release_year = game.results.original_release_date.substring(0,10);
-    game.results.expected_release_month = '';
-  }
-  else{game.results.expected_release_year = game.results.expected_release_year + '-';}
+  if (game.results.expected_release_quarter !== null)
+    expectedReleaseMonth = game.results.expected_release_quarter;
+  else if (game.results.expected_release_month !== null) expectedReleaseMonth = game.results.expected_release_month;
 
-  let extraCaption = null;
-  if(game.results.original_release_date !== null){
-    extraCaption = 'Original Release Date: ';
+  if (game.results.expected_release_year) {
+    expectedReleaseYear = game.results.expected_release_year;
   }
-  else if(game.results.expected_release_year !== null){
+
+  if (game.results.original_release_date !== null) {
+    originalReleaseDate = game.results.original_release_date.substring(0,10);
+  }
+
+  if(typeof expectedReleaseMonth === "number"){
+    if(expectedReleaseMonth.toString().length == 1)
+    {expectedReleaseMonth = '0' + expectedReleaseMonth;}
+  }
+  if(typeof expectedReleaseDay === "number"){
+    if(expectedReleaseDay.toString().length == 1)
+    {expectedReleaseDay = '0' + expectedReleaseDay;}
+  }
+
+  let extraCaption = 'Original Release Date: ';
+  if (game.results.expected_release_year || !game.results.original_release_date)
     extraCaption = 'Expected Release Date: ';
-  }
   
+  let date = '';
+  if (originalReleaseDate) {
+    date = originalReleaseDate;
+  } 
+  else {
+    if (expectedReleaseYear) date += expectedReleaseYear + '-' 
+    date += expectedReleaseMonth;
+    if (expectedReleaseDay) date += '-' + expectedReleaseDay ;
+  }
+
   return `
   <li data-id="${game.results.id}" class="gameCard" >
-  <div class="cardWrapper">
-    <a href="${BASE_URL}${game.results.name}/${baseID}${game.results.id}/" target="_blank">
-      <div class="gameName">${game.results.name}</div> 
-      <img src="${game.results.image.small_url}" alt="This is a clickable picture that will take you to the game" class="cardImage" title="Related Game Image"> 
-      <span class="gameID">${extraCaption}${game.results.expected_release_year}${game.results.expected_release_month}${game.results.expected_release_day}</span> </li>
+    <div class="cardWrapper">
+      <a href="${BASE_URL}${game.results.name}/${baseID}${game.results.id}/" target="_blank">
+        <div class="gameName">${game.results.name}</div> 
+        <img src="${game.results.image.small_url}" 
+          alt="This is a clickable picture that will take you to 
+          the game" class="cardImage" title="Related Game Image"> 
+        <span class="gameID">${extraCaption}${date}</span>
+      </a>
     </div>
-  </a>`
-  ;
+  </li>`;
 }
 
 function render(){
