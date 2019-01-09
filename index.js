@@ -80,7 +80,9 @@ function loadTopGames(callback){
 }
 
 function addTopGamesToStore(response){
+  //console.log(response);
   topGames.games = response;
+  //console.log(topGames.games);
   renderTopGames();
 }
 //creates the HTML for the initial game results
@@ -129,6 +131,7 @@ function generateTopGamesHTML(game){
 }
 
 function renderTopGames(){
+  //console.log(topGames.games);
   const gameElements = topGames.games.results.map (game => {
     return generateTopGamesHTML(game);
   });
