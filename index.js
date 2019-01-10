@@ -18,7 +18,6 @@ let topGames = {
 const errorMessages = {
   noInput: 'The search field was left blank. Please type the name of a game.',
   noResults: 'There were no results for this search. Please search for a different game.',
-  noSimilar: 'No similar games were found for the name you entered.',
   errorCondition: false,
 };
 
@@ -80,9 +79,7 @@ function loadTopGames(callback){
 }
 
 function addTopGamesToStore(response){
-  //console.log(response);
   topGames.games = response;
-  //console.log(topGames.games);
   renderTopGames();
 }
 //creates the HTML for the initial game results
@@ -131,46 +128,30 @@ function generateTopGamesHTML(game){
 }
 
 function renderTopGames(){
-  //console.log(topGames.games);
   const gameElements = topGames.games.results.map (game => {
     return generateTopGamesHTML(game);
   });
   $('.popularGames').html(gameElements);
 }
 
-function initialFormatRelatedGames(response){
-for(let i = 0; i < response.results.length; i++){
-  console.log(response.results[i].name);
-  console.log(response.results[i].guid);
-}
-  let formattedResults;
-  if(response.results === null){
-    generateError(errorMessages.noSimilar);
-    return;
+function initialFormatRelatedGames(response){//formats the guid of each related game so that they can be fed into a new request to get details back
+  if(!response.results.length){
+    return generateError(errorMessages.noResults);
   }
-  else if (response.results.length === 1){
-    formattedResults = response.results.map(item => ({
-      name: item.name,
-      id: item.id,
-    }));
-  }
-  else if (response.results.length > 1){
-    formattedResults = response.results.map(item => ({
-      name: item.name,
-      id: item.id,
-    }));
-  }
+  let formattedResults = response.results.map(item => ({
+    name: item.name,
+    id: item.id,
+  }));
   let storedGames = addRelatedGamesToStore(formattedResults);
   handleDetailResponse(storedGames);
 }
 
 function addRelatedGamesToStore(formattedResults){
   storeIds.games = formattedResults;
-  console.log(storeIds.games);
   return storeIds.games;
 }
 
-function handleDetailResponse(storedGames){
+function handleDetailResponse(storedGames){//uses promise.all to wait for all responses before adding them to our store so that they can be rendered
   let promises = [];
   for (let i = 0; i < storedGames.length; i++){
     promises.push(loadGameDetails(storedGames[i].id));  
@@ -182,7 +163,7 @@ function handleDetailResponse(storedGames){
   });
 }
 
-function addFinalDetailsToStore(response){
+function addFinalDetailsToStore(response){//adds the final related game objects to the store so that they can be accessed for rendering the page
   storeGameData.games = response;
 }
 //creates the HTML for the results text
@@ -268,19 +249,15 @@ function generateError(error){
 function formSubmit() { 
   $('form').on('submit', function(event){ 
     event.preventDefault();
+    $('.errorMessage').html(''); 
+    let input = $('#search-term');
+    let query = input.val().trim();
+    input.val('')
+    if (!query.length)
+      return generateError(errorMessages.noInput);
     $('.loaderDiv').show();
-    let query = $('#search-term').val();
     searchedGame = query;
-    if(query !== '' && query !== null && typeof(query) !== undefined){
-      searchForGames(query,initialFormatRelatedGames);
-    }
-    else if(query === '' || query === null){
-      generateError(errorMessages.noInput);
-    }
-    else{
-      generateError(errorMessages.notAGame);
-    }
-    $('#search-term').val('');
+    searchForGames(query,initialFormatRelatedGames);
   });
 }
 
