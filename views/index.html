@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>API Capstone using GiantBomb</title>
+    <title>VG Release Chart</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
@@ -12,7 +12,9 @@
    
   <body>
     <nav role="navigation">
-      <h1 onClick="window.location.href=window.location.href">VG Release Chart</h1>
+      <input type="button" value="View Wish List" onclick="location.href='/my-list.html'"/>
+      <input type="button_two" value="Log In" onclick="location.href='/login.html'"/>
+      <h1><a href = "/">VG Release Chart</a></h1>
       <div class = "instructions">Find all the information you need about upcoming video games.</div>
         <form role="form">
             <input type="text" id="search-term" title="Search Term" placeholder="Example: Crackdown"/><br>
@@ -33,6 +35,7 @@
       
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
+    <script src="server.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
