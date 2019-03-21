@@ -2,5 +2,5 @@
 exports.DATABASE_URL =
     process.env.DATABASE_URL ||
     global.DATABASE_URL ||
-    `mongodb://tester:${encodeURIComponent('poolshark7%')}@cluster0-tbga6.mongodb.net/test?retryWrites=true`;
+    `mongodb+srv://tester:${encodeURIComponent('poolshark7%')}@cluster0-tbga6.mongodb.net/test?retryWrites=true`;
 exports.PORT = process.env.PORT || 8080;
