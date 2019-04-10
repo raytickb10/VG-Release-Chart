@@ -1,13 +1,194 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image:url("gaming-controller-wallpaper.jpg");
+  background-position: 50% 0%;
+  background-attachment: fixed;
+  background-blend-mode: hard-light;
+  background-color: #27496d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* style the container */
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px 0 30px 0;
+} 
+
+/* style inputs and link buttons */
+input,
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+/* style the submit button */
+input[type=submit] {
+  background-color: #366492;
+  color: white;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  opacity: 1;
+}
+  
+p{
+  display: inline-block;
+  }
+
+/* Two-column layout */
+.col {
+  float: left;
+  width: 100%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 100%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 175px;
+}
+
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  background-color: #666;
+  border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+}
+</style>
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
 </head>
 <body>
 
-<input type="button" value="Return Home" onclick="location.href='/'"/>
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+<div class="container">
+  <form id="myForm">
+    <div class="row">
+      <h2 style="text-align:center">Login with Username and Password</h2>
 
+      <div class="col">
+        <input type="text" name="username" placeholder="Username" id="username" required>
+        <input type="password" name="password" placeholder="Password" id="psw" required>
+        <input type="submit" value="Login">
+      </div>
+      
+    </div>
+  </form>
+</div>
+
+<div class="bottom-container">
+ 
+      <p>Don't have an account? <a href="/register" style="color:white" >Register</a></p>
+  <br>
+      <p>Or return to hompage. <a href="/" style="color:white" >Return Home</a></p>
+</div>
+
+<script>
+  
+let searchedname;
+let searchedpass;
+
+function submitRegister(userName, passWord){
+  $.ajax({
+    url: "/api/auth/login",
+    data: JSON.stringify({
+      "username" : `${userName}`, 
+      "password": `${passWord}`,
+      }),
+    contentType: 'application/json',
+    dataType:'json',
+    type:'POST',
+    success: function(){
+      window.location.href = "/";
+    }
+  }).then(function (data){
+    console.log(data) 
+    localStorage.setItem('token', data.authToken);
+    localStorage.setItem('userID', data.user.id);
+    localStorage.setItem('userName', data.user.username);
+    
+    //console.log(data.user);
+    
+    //const wishResult = data.user.wishlist.find(f => f.username === param.username);
+    //console.log(wishResult);
+    //localStorage.setItem('wishList', data.user.wishlist);
+  });
+  
+}
+  
+function formSubmit() { 
+  $('#myForm').on('submit', function(event){ 
+    event.preventDefault();
+    $('.errorMessage').html(''); 
+    let name = $('#username');
+    let pass = $('#psw');
+    let fullName = name.val().trim();
+    let fullPass = pass.val().trim();
+    name.val('')
+    pass.val('')
+    if (!fullName.length)
+      return generateError(errorMessages.noInput);
+    $('.loaderDiv').show();
+    searchedname = fullName;
+    searchedpass = fullPass;
+    submitRegister(searchedname, searchedpass);
+  });
+}
+  
+$(function(){
+  formSubmit();
+});
+  
+</script>
+  
 </body>
-</html> 
+</html>
