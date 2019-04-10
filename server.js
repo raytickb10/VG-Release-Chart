@@ -129,17 +129,3 @@ if (require.main === module) {
 };
 
 module.exports = { app, runServer, closeServer };
-
-      server.close(err => {
-        if (err) {
-          return reject(err);
-        }
-        resolve();
-      });
-    });
-  });
-}
-
-if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
-};
