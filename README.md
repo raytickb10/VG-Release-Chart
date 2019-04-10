@@ -8,6 +8,14 @@ This app will display a list of upcoming video games taken from the Giant Bomb a
 
 !!!!ADDED FUNCTIONALITY!!!!
 
-Now with VG Release Chart, users can register and log into their own accounts and can create their very own wishlist of games. Once a user arrives at the homepage they will notice that there is a register and log in button at the top right of the screen. For added convenience there is already a pre-registered user profile called default. Once the user has logged in they will be able to add games to their wishlist by clicking the corresponding button on the bottom of each game profile. From the homepage the user can then go to their own custom wishlist and see the games that have been stored as well as remove any game from the list if they choose to do so.
+Now with VG Release Chart, users can register and log into their own accounts and can create their very own wishlist of games. Once a user arrives at the homepage they will notice that there is a register and log in button at the top right of the screen. For added convenience there is already a pre-registered user profile called default. 
+
+![VG Release Screen Shot](https://github.com/raytickb10/VG-Release-Chart/blob/master/Vg_release_partTwo.PNG?raw=true "Optional Title")
+
+Once the user has logged in they will be able to add games to their wishlist by clicking the corresponding button on the bottom of each game profile. From the homepage the user can then go to their own custom wishlist and see the games that have been stored as well as remove any game from the list if they choose to do so.
+
+![VG Release Screen Shot](https://github.com/raytickb10/VG-Release-Chart/blob/master/Vg_release_partThree.PNG?raw=true "Optional Title")
+
+![VG Release Screen Shot](https://github.com/raytickb10/VG-Release-Chart/blob/master/Vg_release_partFour.PNG?raw=true "Optional Title")
 
 HTML/CSS/JavaScript/jQuery/Node.js/Mongodb/Mongoose/Express/Passport
