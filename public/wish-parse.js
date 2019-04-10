@@ -30,7 +30,6 @@ function removeFromList(thisGameID, thisGameName){
   const newArray = currentList.filter(function(item) {
     return item.gameID != idToRemove;
   });
-  console.log(newArray);
   window.alert(thisGameName + " has been removed from your wishlist!");
   reformWishList(newArray);
 }
@@ -73,9 +72,9 @@ function loadWishList()
     type:'GET',
     headers: {'Authorization': 'Bearer ' + currentToken},
     success: function(data){
-      console.log(data);
+      
       var extraValue = data.wishlist;
-      console.log(extraValue);
+      
       renderTopGames(extraValue);
       data.wishlist.forEach(function(element){currentList.push(element);});
     }
