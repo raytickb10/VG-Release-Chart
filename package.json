@@ -1,15 +1,26 @@
 {
   "name": "vg-release-chart",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^7.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "mongoose": "^5.4.19"
+    "express-ejs-layouts": "^2.5.0",
+    "express-sessions": "^1.15.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.20",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "engines": {
     "node": "8.x"
