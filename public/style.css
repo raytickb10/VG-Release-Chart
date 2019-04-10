@@ -68,7 +68,7 @@ h2{
 
  nav .instructions{
   font-size:1.1em;
-  margin-bottom:30px;
+  margin-bottom:20px;
   text-shadow: 0 1px 5px rgba(0, 0, 0, .7),0 1px 4px rgba(0, 0, 0, 0.7),0 1px 1px rgba(0, 0, 0, 1);
 }
 
@@ -405,7 +405,7 @@ body .loaderDiv {
   100% { transform: rotate(360deg); }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 768px) {
 
   h1{
     font-size:3em;
@@ -413,6 +413,21 @@ body .loaderDiv {
     padding:0;
     margin-top:30px;
   }
+  
+  h2{
+  font-size:2.7em;
+  font-family: 'Aldrich', sans-serif;
+  padding:0;
+  background-color: white;
+  border-style: solid;
+  margin:0px;
+  color:black;
+  text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
 
   .resultsText{
     margin-top:50px;
@@ -449,10 +464,99 @@ body .loaderDiv {
     color: white;
     margin-bottom:10px;
   }
+  
+  input[value="View Wish List"] {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    height:30px;
+    width:120px;
+    margin-top:10px;
+  }
+    input[value="Log In"] {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  height:30px;
+  width:120px;
+  margin-top:10px;
+}
+  input[value="Log Out"] {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  height:30px;
+  width:120px;
+  margin-top:10px;
+}
+    input[value="Register"] {
+  position: absolute;
+  top: 25px;
+  right: 130px;
+  height:30px;
+  width:120px;
+  margin-top:10px;
+  
+}
+    input[value="Return Home"] {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height:30px;
+  width:120px;
+  margin-top:10px;
+}
 
   @media only screen and (max-width: 320px) {
     .alternateFinderInstructions{
       padding-top: 50px;
+    }
+    
+    input[value="View Wish List"] {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    height:20px;
+    width:110px;
+    margin-top:10px;
+  }
+    input[value="Log In"] {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  height:20px;
+  width:110px;
+  margin-top:10px;
+}
+  input[value="Log Out"] {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  height:20px;
+  width:110px;
+  margin-top:10px;
+}
+    input[value="Register"] {
+  position: absolute;
+  top: 25px;
+  right: 100px;
+  height:20px;
+  width:110px;
+  margin-top:10px;
+  
+}
+    input[value="Return Home"] {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height:20px;
+  width:110px;
+  margin-top:10px;
+}
+    
+    h2{
+      top: 0px;
+      margin: 0;
     }
   }
 }
