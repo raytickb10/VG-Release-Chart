@@ -12,8 +12,11 @@
    
   <body>
     <nav role="navigation">
-      <input type="button" value="View Wish List" onclick="location.href='/my-list.html'"/>
-      <input type="button_two" value="Log In" onclick="location.href='/login.html'"/>
+      <input type="button" value="View Wish List" id="wishListButton" disabled onclick="location.href='/my-list'"/>
+      <input type="button" value="Log In" id="loginButton" enabled onclick="location.href='/login'"/>
+      <input type="button" value="Log Out" id="logoutButton" disabled onclick="clearToken()"/>
+      <input type="button" value="Register" onclick="location.href='/register'"/>
+      <p id="welcome_text">Welcome, </p>
       <h1><a href = "/">VG Release Chart</a></h1>
       <div class = "instructions">Find all the information you need about upcoming video games.</div>
         <form role="form">
@@ -35,7 +38,7 @@
       
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
-    <script src="server.js"></script>
+    <script src="parse-data.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
